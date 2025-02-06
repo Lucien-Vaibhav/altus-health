@@ -38,12 +38,12 @@ export default function Header() {
       <nav className="bg-white shadow-md py-4 px-6 flex justify-between items-center">
         {/* Logo Section */}
         <div className="w-32 h-auto">
-          <Image src="/logo-blue.png" alt="Patholab Logo" width={120} height={40} priority />
+          <Image src="/logo-blue.png" alt="Patholab Logo" width={100} height={100} priority />
         </div>
 
         {/* Navigation Links */}
-        <ul className="hidden md:flex space-x-6 text-blue-900 font-medium">
-          <li><Link href="/">Home</Link></li>
+        <ul className="hidden md:flex space-x-6 text-blue-900 nav-menu">
+          <li className="hidden md:flex space-x-6 text-blue-900 font-medium"><Link href="/">Home</Link></li>
           <li><Link href="/services">Services</Link></li>
           <li><Link href="/blogs">Blog</Link></li>
           <li><Link href="/contact">Contact</Link></li>
@@ -55,7 +55,7 @@ export default function Header() {
           <FaTwitter className="text-blue-900 cursor-pointer" />
           <FaInstagram className="text-blue-900 cursor-pointer" />
           <FaPinterestP className="text-blue-900 cursor-pointer" />
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-md">Make Appointment</button>
+          <button className="bg-blue-600 text-white px-4 py-2 rounded-full">Make Appointment</button>
         </div>
       </nav>
     </header>

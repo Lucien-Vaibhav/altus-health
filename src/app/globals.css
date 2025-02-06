@@ -9,7 +9,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #FFF;
     --foreground: #ededed;
   }
 }
@@ -17,5 +17,48 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Heebo", sans-serif;
 }
+/* Apply Red Hat Display to Main Headings */
+h1, h2, h3,div,ul,li,a,p{
+  font-family: "Red Hat Display", sans-serif;
+}
+
+/* Apply Heebo to Subheadings */
+h4, h5, h6, span,button {
+  font-family: "Heebo", sans-serif;
+}
+
+.nav-menu li {
+  font-size: 17px; 
+  font-weight: 700; 
+}
+
+/* Modified your original CSS with rounded edges */
+.hexagon-shadow {
+  clip-path: polygon(
+    50% 0%,
+    95% 25%,
+    95% 75%,
+    50% 100%,
+    5% 75%,
+    5% 25%
+  );
+  border-radius: 12px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* Add pseudo-element for better rounded effect */
+.hexagon-shadow::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background: inherit;
+  clip-path: inherit;
+  border-radius: 10px;
+}
+
