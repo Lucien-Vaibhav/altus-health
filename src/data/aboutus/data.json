@@ -1,0 +1,30 @@
+{
+    "specialists": [
+      {
+        "name": "Lora Robert",
+        "role": "Analyst",
+        "image": "/images/lora.png"
+      },
+      {
+        "name": "Albert Frod",
+        "role": "Head Microbiologist",
+        "image": "/images/albert.png"
+      }
+    ],
+    "otherData": {
+      "someKey": "someValue",
+      "anotherKey": 123
+    },
+      "moreSpecialists": [
+      {
+        "name": "Jane Doe",
+        "role": "Doctor",
+        "image": "/images/jane.png"
+      },
+      {
+        "name": "John Smith",
+        "role": "Nurse",
+        "image": "/images/john.png"
+      }
+    ]
+  }

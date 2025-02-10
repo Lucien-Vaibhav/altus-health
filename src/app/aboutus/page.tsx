@@ -10,6 +10,10 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import Employees from "../components/aboutus/Employees";
+import Progress from "../components/aboutus/Progress";
+import Testimonial from "../components/aboutus/Testimonial";
+import Awards from "../components/aboutus/Awards";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,6 +24,8 @@ export default function AboutUsSection() {
   const secondaryHexRef = useRef<HTMLDivElement | null>(null);
   const secondaryImageRef = useRef<HTMLImageElement | null>(null);
   const counterRefs = useRef<(HTMLHeadingElement | null)[]>([]);
+
+  const listRefs = useRef([]);
 
   useEffect(() => {
     if (breadcrumbRef.current) {
@@ -127,6 +133,25 @@ export default function AboutUsSection() {
             counter.textContent = `${Math.round(animatedValue.value)}${suffix}`;
           },
         });
+      }
+    });
+
+    listRefs.current.forEach((item, index) => {
+      if (item) {
+        gsap.fromTo(
+          item,
+          { opacity: 0, x: index % 2 === 0 ? -50 : 50 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            ease: "power1.out",
+            scrollTrigger: {
+              trigger: item,
+              start: "top 80%",
+            },
+          }
+        );
       }
     });
   }, []);
@@ -288,43 +313,68 @@ export default function AboutUsSection() {
           </div>
         </div>
       </div>
-       <div className="max-w-7xl mx-auto px-6 md:px-16 text-center mb-12">
-    <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-      Our Achievements in Numbers
-    </h2>
-  </div>
-
-  {/* Counter Grid */}
-  <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-center px-6 md:px-16">
-    {[
-      { value: 100, suffix: "M+", label: "Tests Conducted", subLabel: "Accurate & Reliable" },
-      { value: 300, suffix: "M+", label: "Expert Pathologists", subLabel: "Industry Leaders" },
-      { value: 20, suffix: "+", label: "Premium Branches", subLabel: "Expanding Nationwide" },
-      { value: 100, suffix: "%", label: "Quality Assurance", subLabel: "Certified & Trusted" },
-    ].map((item, index) => (
-      <div key={index} className="p-6 bg-white rounded-lg shadow-lg">
-        {/* Counter Value */}
-        <h2
-          ref={(el) => {
-            if (el) counterRefs.current[index] = el;
-          }}
-          data-value={item.value}
-          className="text-4xl md:text-5xl font-bold text-blue-500"
-        >
-          0
+      <div className="max-w-7xl mx-auto px-6 md:px-16 text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+          Our Achievements in Numbers
         </h2>
-
-        {/* Suffix */}
-        <span className="text-2xl font-semibold">{item.suffix}</span>
-
-        {/* Label */}
-        <p className="mt-2 text-gray-700 font-semibold text-lg">{item.label}</p>
-
-        {/* Sub Label */}
-        <p className="text-gray-500 text-sm mt-1">{item.subLabel}</p>
       </div>
-    ))}
-  </div>
+      {/* Counter Grid */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-center px-6 md:px-16">
+        {[
+          {
+            value: 100,
+            suffix: "M+",
+            label: "Tests Conducted",
+            subLabel: "Accurate & Reliable",
+          },
+          {
+            value: 300,
+            suffix: "M+",
+            label: "Expert Pathologists",
+            subLabel: "Industry Leaders",
+          },
+          {
+            value: 20,
+            suffix: "+",
+            label: "Premium Branches",
+            subLabel: "Expanding Nationwide",
+          },
+          {
+            value: 100,
+            suffix: "%",
+            label: "Quality Assurance",
+            subLabel: "Certified & Trusted",
+          },
+        ].map((item, index) => (
+          <div key={index} className="p-6 bg-white rounded-lg shadow-lg">
+            {/* Counter Value */}
+            <h2
+              ref={(el) => {
+                if (el) counterRefs.current[index] = el;
+              }}
+              data-value={item.value}
+              className="text-4xl md:text-5xl font-bold text-blue-500"
+            >
+              0
+            </h2>
+
+            {/* Suffix */}
+            <span className="text-2xl font-semibold">{item.suffix}</span>
+
+            {/* Label */}
+            <p className="mt-2 text-gray-700 font-semibold text-lg">
+              {item.label}
+            </p>
+
+            {/* Sub Label */}
+            <p className="text-gray-500 text-sm mt-1">{item.subLabel}</p>
+          </div>
+        ))}
+      </div>
+      <Progress />
+      <Employees />
+      <Testimonial />
+      <Awards />
     </section>
   );
 }
