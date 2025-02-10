@@ -5,51 +5,61 @@ import Image from "next/image";
 import gsap from "gsap";
 
 export default function Progress() {
-    const protocolRefs = useRef<(HTMLDivElement | null)[]>([]);
-    const progressRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const protocolRefs = useRef<HTMLDivElement[]>([]);
+  const progressRefs = useRef<HTMLDivElement[]>([]);
 
-    useEffect(() => {
-       protocolRefs.current.forEach((ref) => {
-            if (ref) {
-              gsap.fromTo(
-                ref,
-                { opacity: 0, y: 50 },
-                {
-                  opacity: 1,
-                  y: 0,
-                  duration: 0.6,
-                  ease: "power1.out",
-                  scrollTrigger: {
-                    trigger: ref,
-                    start: "top 80%",
-                  },
-                }
-              );
-            }
-          });
-    
-          progressRefs.current.forEach((progress) => {
-            if (progress) {
-              const targetWidth = progress.dataset.width || "0%";
-              gsap.fromTo(
-                progress,
-                { width: "0%" },
-                {
-                  width: targetWidth,
-                  duration: 2,
-                  ease: "power1.out",
-                  scrollTrigger: {
-                    trigger: progress,
-                    start: "top 80%",
-                  },
-                }
-              );
-            }
-          });
-    
-         
-      }, []);
+  // Function to set refs properly (avoiding duplicates)
+  const setProtocolRef = (el: HTMLDivElement | null, index: number) => {
+    if (el && !protocolRefs.current.includes(el)) {
+      protocolRefs.current[index] = el;
+    }
+  };
 
+  const setProgressRef = (el: HTMLDivElement | null, index: number) => {
+    if (el && !progressRefs.current.includes(el)) {
+      progressRefs.current[index] = el;
+    }
+  };
+
+  useEffect(() => {
+    protocolRefs.current.forEach((ref) => {
+      if (ref) {
+        gsap.fromTo(
+          ref,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power1.out",
+            scrollTrigger: {
+              trigger: ref,
+              start: "top 80%",
+            },
+          }
+        );
+      }
+    });
+
+    progressRefs.current.forEach((progress) => {
+      if (progress) {
+        const targetWidth = progress.dataset.width || "0%";
+        gsap.fromTo(
+          progress,
+          { width: "0%" },
+          {
+            width: targetWidth,
+            duration: 2,
+            ease: "power1.out",
+            scrollTrigger: {
+              trigger: progress,
+              start: "top 80%",
+            },
+          }
+        );
+      }
+    });
+  }, []);
 
   return (
     <div className="max-w-7xl mx-auto px-6 md:px-16 my-16">
@@ -64,10 +74,7 @@ export default function Progress() {
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div
-          className="bg-blue-100 p-6 rounded-lg shadow-lg"
-          ref={(el) => protocolRefs.current.push(el)}
-        >
+        <div className="bg-blue-100 p-6 rounded-lg shadow-lg" ref={(el) => setProtocolRef(el, 0)}>
           <h2 className="text-2xl font-bold text-blue-900 mb-4">
             Patholab Laboratory Protocol
           </h2>
@@ -78,10 +85,7 @@ export default function Progress() {
               "Continuous Monitoring & quality control",
               "Proper documentation & quick report Delivery",
             ].map((text, index) => (
-              <li
-                key={index}
-                className="flex items-center space-x-4 text-lg text-blue-900"
-              >
+              <li key={index} className="flex items-center space-x-4 text-lg text-blue-900">
                 <span className="text-2xl">✔</span>
                 {text}
               </li>
@@ -89,33 +93,23 @@ export default function Progress() {
           </ul>
           <div className="mt-6">
             <div className="mb-4">
-              <p className="text-lg font-semibold text-blue-900">
-                Diagnostic Facility
-              </p>
-              <div
-                className="bg-blue-200 h-4 rounded-full"
-                style={{ overflow: "hidden" }}
-              >
+              <p className="text-lg font-semibold text-blue-900">Diagnostic Facility</p>
+              <div className="bg-blue-200 h-4 rounded-full" style={{ overflow: "hidden" }}>
                 <div
                   className="bg-blue-500 h-4 rounded-full"
                   style={{ width: "90%" }}
-                  ref={(el) => progressRefs.current.push(el)}
+                  ref={(el) => setProgressRef(el, 0)}
                   data-width="90%"
                 ></div>
               </div>
             </div>
             <div>
-              <p className="text-lg font-semibold text-blue-900">
-                Accuracy in Findings
-              </p>
-              <div
-                className="bg-blue-200 h-4 rounded-full"
-                style={{ overflow: "hidden" }}
-              >
+              <p className="text-lg font-semibold text-blue-900">Accuracy in Findings</p>
+              <div className="bg-blue-200 h-4 rounded-full" style={{ overflow: "hidden" }}>
                 <div
                   className="bg-blue-500 h-4 rounded-full"
                   style={{ width: "96%" }}
-                  ref={(el) => progressRefs.current.push(el)}
+                  ref={(el) => setProgressRef(el, 1)}
                   data-width="96%"
                 ></div>
               </div>

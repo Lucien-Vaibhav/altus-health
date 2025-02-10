@@ -23,17 +23,19 @@ const AwardsSection = () => {
       { opacity: 1, x: 0, duration: 1, ease: "power2.out" }
     );
 
-    gsap.fromTo(
-      awardsRef.current?.children,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power2.out",
-        stagger: 0.2,
-      }
-    );
+    if (awardsRef.current) {
+      gsap.fromTo(
+        awardsRef.current.children, // Fixed to avoid undefined issue
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power2.out",
+          stagger: 0.2,
+        }
+      );
+    }
 
     let obj = { value: 0 };
     gsap.to(obj, {
@@ -67,8 +69,10 @@ const AwardsSection = () => {
 
           {/* Centered Section Only */}
           <div className="flex flex-col items-center text-center">
-            <div ref={numberRef} className="relative">
-              <span className="text-[148px] leading-none text-[#1d2864] font-extrabold">{count}</span>
+            <div className="relative">
+              <span ref={numberRef} className="text-[148px] leading-none text-[#1d2864] font-extrabold">
+                {count}
+              </span>
               <span className="text-green-500 text-[48px] absolute top-[-15px] right-[-20px]">+</span>
             </div>
             <p className="text-gray-600 text-lg">Awards from all over the world</p>
@@ -84,8 +88,8 @@ const AwardsSection = () => {
             family member has a condition.
           </p>
 
-       {/* Award Images in 3 Columns x 2 Rows */}
-       <div ref={awardsRef} className="grid grid-cols-3 gap-6">
+          {/* Award Images in 3 Columns x 2 Rows */}
+          <div ref={awardsRef} className="grid grid-cols-3 gap-6">
             {awards.map((award, index) => (
               <div
                 key={index}

@@ -42,7 +42,11 @@ export default function StatsSection() {
             <div className="flex items-center space-x-3">
               <img src={stat.icon} alt={stat.label} className="w-10 h-10" />
               <h2
-                ref={(el) => (countRefs.current[index] = el)}
+               ref={(el) => {
+                if (el) {
+                  countRefs.current[index] = el;
+                }
+              }}
                 className="text-4xl font-bold text-[#1d2864]"
               >
                 0{stat.suffix}

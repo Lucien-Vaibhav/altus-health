@@ -29,10 +29,9 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-100 text-gray-700 pt-16 pb-8">
-        
       <div className="max-w-7xl mx-auto ">
         {/* Footer Main Content */}
-        <ContactLetter/>
+        <ContactLetter />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Left - Logo & Socials */}
           <div>
@@ -70,7 +69,7 @@ const Footer = () => {
               src="/line-title.png"
               alt="Wavy Underline"
               width={35}
-              height={35} 
+              height={35}
               className="mt-1"
             />
             <ul className="mt-3 space-y-2 text-sm">
@@ -91,7 +90,7 @@ const Footer = () => {
               src="/line-title.png"
               alt="Wavy Underline"
               width={35}
-              height={35} 
+              height={35}
               className="mt-1"
             />
             <ul className="mt-3 space-y-2 text-sm">
@@ -112,7 +111,7 @@ const Footer = () => {
               src="/line-title.png"
               alt="Wavy Underline"
               width={35}
-              height={35} 
+              height={35}
               className="mt-1"
             />
             <ul className="mt-3 text-sm space-y-2">
@@ -146,8 +145,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 bg-white rounded-lg p-6 mb-10 text-gray-900">
           {/* Phone */}
           <div className="flex items-center space-x-4">
-            <div className="bg-blue-600 text-white p-3 rounded-full flex items-center justify-center">
-              <MdPhone ref={phoneIconRef} className="text-2xl" />
+            <div
+              ref={phoneIconRef}
+              className="bg-blue-600 text-white p-3 rounded-full flex items-center justify-center"
+            >
+              <MdPhone className="text-2xl" />
             </div>
             <div>
               <p className="text-sm font-semibold">Need Help? Book Lab Visit</p>

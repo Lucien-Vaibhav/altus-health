@@ -121,7 +121,9 @@ export default function Testimonial() {
                   {/* Profile Image Wrapper (Keeps Border Static) */}
                   <div className="w-24 h-24 rounded-full border-4 border-gray-300 overflow-hidden flex items-center justify-center">
                     <Image
-                      ref={(el) => (imageRefs.current[index] = el)}
+                      ref={(el) => {
+                        imageRefs.current[index] = el;
+                      }}
                       src={testimonial.image}
                       alt={testimonial.name}
                       width={96}
@@ -142,7 +144,9 @@ export default function Testimonial() {
                         </span>
                       </div>
                       <div className="flex">
-                        <span className="text-[#1d2864] text-xl font-bold text-left block">Rating: </span>
+                        <span className="text-[#1d2864] text-xl font-bold text-left block">
+                          Rating:{" "}
+                        </span>
                         {Array.from({ length: testimonial.rating }).map(
                           (_, i) => (
                             <span key={i} className="text-yellow-400 text-2xl">

@@ -160,7 +160,11 @@ export default function HealthCheckSection() {
           {Object.keys(packages).map((tab, index) => (
             <button
               key={tab}
-              ref={(el) => el && (tabsRef.current[index] = el)}
+              ref={(el) => {
+                if (el) {
+                  tabsRef.current[index] = el;
+                }
+              }}
               className={`relative px-6 py-2 rounded-full border-2 transition-colors duration-200 ${
                 activeTab === tab
                   ? "border-blue-600 bg-blue-600 text-white"
@@ -178,7 +182,11 @@ export default function HealthCheckSection() {
           {packages[activeTab].map((pkg, index) => (
             <div
               key={index}
-              ref={(el) => el && (cardsRef.current[index] = el)}
+              ref={(el) => {
+                if (el) {
+                  cardsRef.current[index] = el;
+                }
+              }}
               className="group relative bg-white shadow-lg rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 h-[520px] w-[340px] mx-auto"
             >
               {/* Card Front */}

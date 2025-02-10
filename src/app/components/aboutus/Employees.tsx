@@ -39,32 +39,32 @@ export default function Employees() {
                 {specialists.map((person) => (
                     <div
                         key={person.id}
-                        className="specialist-card relative group overflow-hidden shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105"
+                        className="specialist-card relative group overflow-hidden shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-110 rounded-lg"
                     >
                         <Image
                             src={person.src}
                             alt={person.alt}
                             width={300}
-                            height={450} // Increased height of the image box
-                            className=" object-cover w-full h-full"
+                            height={450}
+                            className="object-cover w-full h-full transition-transform duration-500"
                         />
 
                         {/* Hover Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center">
-                            <div className="bg-white p-4 rounded-lg shadow-lg text-center">
-                                <h4 className="text-sm text-green-600">{person.role}</h4>
+                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end items-center p-6">
+                            <div className="bg-white p-5 rounded-lg shadow-lg text-center w-11/12">
+                                <h4 className="text-sm text-green-600 font-medium">{person.role}</h4>
                                 <h3 className="text-xl font-bold text-gray-900">{person.alt}</h3>
                                 <div className="flex justify-center gap-3 mt-3">
-                                    <a href="#" className="text-gray-600 hover:text-blue-600">
+                                    <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">
                                         <FontAwesomeIcon icon={faFacebook} size="lg" />
                                     </a>
-                                    <a href="#" className="text-gray-600 hover:text-blue-400">
+                                    <a href="#" className="text-gray-600 hover:text-blue-400 transition-colors">
                                         <FontAwesomeIcon icon={faTwitter} size="lg" />
                                     </a>
-                                    <a href="#" className="text-gray-600 hover:text-pink-500">
+                                    <a href="#" className="text-gray-600 hover:text-pink-500 transition-colors">
                                         <FontAwesomeIcon icon={faInstagram} size="lg" />
                                     </a>
-                                    <a href="#" className="text-gray-600 hover:text-red-600">
+                                    <a href="#" className="text-gray-600 hover:text-red-600 transition-colors">
                                         <FontAwesomeIcon icon={faPinterest} size="lg" />
                                     </a>
                                 </div>
@@ -76,4 +76,3 @@ export default function Employees() {
         </section>
     );
 }
-

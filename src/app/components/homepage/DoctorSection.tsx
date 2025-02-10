@@ -7,7 +7,7 @@ const DoctorsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null); // ✅ Updated type
 
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { duration: 1, ease: "power2.out" } });
@@ -43,7 +43,7 @@ const DoctorsSection = () => {
       {/* Image Section */}
       <div className="md:w-1/2 flex justify-center mt-8 md:mt-0">
         <img
-          ref={imageRef}
+          ref={imageRef} // ✅ Correct ref type
           src="/bg-right.png"
           alt="Doctors"
           className="max-w-full rounded-xl -mt-10"

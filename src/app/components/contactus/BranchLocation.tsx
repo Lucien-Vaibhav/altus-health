@@ -3,6 +3,12 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
+declare global {
+  interface Window {
+    google: any;
+  }
+}
+
 const branches = [
   {
     name: "Texas Brunch",
@@ -21,7 +27,7 @@ const branches = [
     closed: "Sunday - Closed",
   },
   {
-    name: "Utah Brunch",
+    name: "Miami Brunch",
     address: "183 Marina Avenue, Miami Central Mall, United State of America",
     email: "Patholab@servicecare.com",
     phone: "+987123 56666",
@@ -29,7 +35,7 @@ const branches = [
     closed: "Sunday - Closed",
   },
   {
-    name: "LA Brunch",
+    name: "Miami Brunch",
     address: "183 Marina Avenue, Miami Central Mall, United State of America",
     email: "Patholab@servicecare.com",
     phone: "+987123 56666",
@@ -37,7 +43,7 @@ const branches = [
     closed: "Sunday - Closed",
   },
   {
-    name: "Chicago Brunch",
+    name: "Miami Brunch",
     address: "183 Marina Avenue, Miami Central Mall, United State of America",
     email: "Patholab@servicecare.com",
     phone: "+987123 56666",
@@ -45,7 +51,7 @@ const branches = [
     closed: "Sunday - Closed",
   },
   {
-    name: "New York Brunch",
+    name: "Miami Brunch",
     address: "183 Marina Avenue, Miami Central Mall, United State of America",
     email: "Patholab@servicecare.com",
     phone: "+987123 56666",
@@ -55,7 +61,7 @@ const branches = [
 ];
 
 export default function BranchLocation() {
-  const timerRefs = useRef<(HTMLImageElement | null)[]>([]);
+  const timerRefs = useRef<(HTMLImageElement | null)[]>(new Array(branches.length).fill(null));
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -74,9 +80,9 @@ export default function BranchLocation() {
     if (typeof window === "undefined") return;
 
     const loadGoogleMaps = () => {
-      if (!window.google) return;
+      if (!window.google || !window.google.maps) return;
       const map = new window.google.maps.Map(mapRef.current!, {
-        center: { lat: 25.7617, lng: -80.1918 }, // Default location (Miami)
+        center: { lat: 25.7617, lng: -80.1918 },
         zoom: 12,
       });
 
@@ -87,7 +93,7 @@ export default function BranchLocation() {
       });
     };
 
-    if (!window.google) {
+    if (!window.google || !window.google.maps) {
       const script = document.createElement("script");
       script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAzWsHhwsYapR9xLcmVu9ziAOpQ5d9ZpjI&callback=initMap`;
       script.async = true;
@@ -113,9 +119,7 @@ export default function BranchLocation() {
               {/* Address */}
               <div className="mt-6">
                 <h4 className="text-xl font-bold text-gray-800">Our Address</h4>
-                <p className="text-gray-600 mt-2 flex items-center gap-2">
-                  📍 {branch.address}
-                </p>
+                <p className="text-gray-600 mt-2 flex items-center gap-2">📍 {branch.address}</p>
               </div>
 
               {/* Contact Info */}
@@ -130,7 +134,9 @@ export default function BranchLocation() {
                 {/* Rotating Timer Image with Square Background */}
                 <div className="w-16 h-16 bg-blue-400 rounded-2xl flex items-center justify-center">
                   <img
-                    ref={(el) => (timerRefs.current[index] = el)}
+                    ref={(el) => {
+                      timerRefs.current[index] = el;
+                    }}
                     src="/clock.png"
                     alt="Timer"
                     className="w-12 h-12"
