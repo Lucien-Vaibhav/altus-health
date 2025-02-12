@@ -11,7 +11,8 @@ export default function BlogPage() {
   const breadcrumbRef = useRef(null); // ✅ Removed explicit HTMLDivElement type
 
   useEffect(() => {
-    if (typeof window !== "undefined") { // ✅ Ensures this runs only on the client
+    if (typeof window !== "undefined") {
+      // ✅ Ensures this runs only on the client
       gsap.registerPlugin(ScrollTrigger);
 
       if (breadcrumbRef.current) {
@@ -42,9 +43,7 @@ export default function BlogPage() {
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative z-10 flex flex-col justify-center h-full px-6 md:px-16">
           <div className="flex flex-col md:flex-row md:items-center justify-between">
-            <h1 className="text-white text-3xl md:text-5xl font-bold">
-              Blogs 
-            </h1>
+            <h1 className="text-white text-3xl md:text-5xl font-bold">Blogs</h1>
             <nav className="text-white text-sm md:text-lg mt-2 md:mt-0">
               <Link href="/" className="hover:text-blue-400 transition">
                 Home
