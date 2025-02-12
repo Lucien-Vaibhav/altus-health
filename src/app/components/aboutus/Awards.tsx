@@ -7,7 +7,7 @@ const AwardsSection = () => {
   const awardsRef = useRef<HTMLDivElement | null>(null);
   const leftContentRef = useRef<HTMLDivElement | null>(null);
   const rightContentRef = useRef<HTMLDivElement | null>(null);
-  const numberRef = useRef<HTMLSpanElement | null>(null);
+  const numberRef = useRef<HTMLHeadingElement | null>(null);
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -61,21 +61,34 @@ const AwardsSection = () => {
     <section className="bg-white py-16 px-6 md:px-12">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center">
         {/* Left Side: Title, Award Count */}
-        <div ref={leftContentRef} className="md:w-1/2 flex flex-col text-left space-y-6">
-          <p className="text-green-500 font-semibold">Promising Best Quality Services</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-            We have got prestigious awards for our work
+        <div
+          ref={leftContentRef}
+          className="md:w-1/2 flex flex-col text-left space-y-6"
+        >
+          <p className="text-[#0071dc] text-[18px] font-semibold">
+            Promising Best Quality Services
+          </p>
+          <h2 className="text-[42px]  font-bold text-[#1d2864]">
+            We have got prestigious <br />
+            awards for our work
           </h2>
 
           {/* Centered Section Only */}
           <div className="flex flex-col items-center text-center">
             <div className="relative">
-              <span ref={numberRef} className="text-[148px] leading-none text-[#1d2864] font-extrabold">
+              <h1
+                ref={numberRef}
+                className="text-[158px] leading-none text-[#1d2864] font-black"
+              >
                 {count}
+              </h1>
+              <span className="text-[#0071dc] text-[58px] absolute top-[-15px] right-[-20px]">
+                +
               </span>
-              <span className="text-green-500 text-[48px] absolute top-[-15px] right-[-20px]">+</span>
             </div>
-            <p className="text-gray-600 text-lg">Awards from all over the world</p>
+            <p className="text-gray-600 text-lg">
+              Awards from all over the world
+            </p>
           </div>
         </div>
 
@@ -93,12 +106,12 @@ const AwardsSection = () => {
             {awards.map((award, index) => (
               <div
                 key={index}
-                className="p-6 border rounded-lg shadow-sm bg-gray-50 flex justify-center items-center"
+                className="p-6  bg-gray-50 flex justify-center items-center"
               >
                 <img
                   src={award}
                   alt={`Award ${index + 1}`}
-                  className="w-32 md:w-40 lg:w-48 h-auto object-contain"
+                  className="w-[100%] h-[100%] object-contain"
                 />
               </div>
             ))}

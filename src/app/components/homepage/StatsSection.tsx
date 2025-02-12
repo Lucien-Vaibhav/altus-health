@@ -37,16 +37,16 @@ export default function StatsSection() {
     <section className="bg-white py-14 px-8 lg:px-20">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {stats.map((stat, index) => (
-          <div key={index} className="flex flex-col items-center p-6 bg-gray-100 rounded-lg shadow-md">
+          <div key={index} className="flex flex-col items-center p-6 bg-gray-100 rounded-lg">
             {/* First Row: Icon & Counter */}
             <div className="flex items-center space-x-3">
               <img src={stat.icon} alt={stat.label} className="w-10 h-10" />
               <h2
-               ref={(el) => {
-                if (el) {
-                  countRefs.current[index] = el;
-                }
-              }}
+                ref={(el) => {
+                  if (el) {
+                    countRefs.current[index] = el;
+                  }
+                }}
                 className="text-4xl font-bold text-[#1d2864]"
               >
                 0{stat.suffix}

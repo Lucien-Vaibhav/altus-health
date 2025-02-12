@@ -89,13 +89,13 @@ const ServiceSection = () => {
 
   return (
     <div className="py-16 px-6 bg-gradient-to-b from-white to-[#C2E0FD] text-center">
-      <h3 className="text-sm text-blue-600 font-semibold">
+      <h3 className="text-blue-600 font-semibold text-lg mb-2">
         High Performance Laboratory Services
       </h3>
-      <h2 className="text-4xl font-bold mt-2">Our Premium Services</h2>
-      <p className="text-gray-600 max-w-2xl mx-auto mt-4">
+      <h2 className="text-5xl font-bold mb-4 text-[#1d2864]">Our Premium Services</h2>
+      <p className="text-[#6f7f90] text-[16px]">
         Our mission is to provide the highest standard of clinical laboratory
-        service to physicians, clinics, hospitals, and healthcare providers.
+        service to <br/>physicians, clinics, hospitals, and healthcare providers.
       </p>
 
       {/* Slider Container */}

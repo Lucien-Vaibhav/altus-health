@@ -83,13 +83,13 @@ export default function BenefitsSection() {
                 <Image
                   src={item.icon}
                   alt={item.title}
-                  width={50}
-                  height={50}
+                  width={80}
+                  height={80}
                 />
-                <h3 className="text-md font-semibold mt-3 text-black">
+                <h3 className="text-[14px] font-semibold mt-3 text-[#1d2864]">
                   {item.title}
                 </h3>
-                <p className="text-sm text-gray-500">{item.subtitle}</p>
+                <p className="text-[10px] text-[#6f7f90]">{item.subtitle}</p>
               </div>
             ))}
           </div>
@@ -133,7 +133,7 @@ export default function BenefitsSection() {
         </div>
 
         {/* Right Side - Benefits Box */}
-        <div className="bg-blue-700 text-white p-8 md:p-12 rounded-xl relative">
+        <div className="bg-blue-700 text-white h-[500px] p-8 md:p-12 rounded-xl relative">
           <h2 className="text-3xl font-bold">
             Benefits by Patholab Laboratory
           </h2>
@@ -152,18 +152,30 @@ export default function BenefitsSection() {
               "Microbiology Lab",
               "Easy Testing Procedure",
             ].map((benefit, index) => (
-              <li key={index} className="flex items-center">
-                <span className="text-lg mr-2">✅</span> {benefit}
+              <li key={index} className="flex items-center gap-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  id="Layer_1"
+                  data-name="Layer 1"
+                  viewBox="0 0 24 24"
+                  width="17"
+                  height="17"
+                >
+                  <path
+                    fill="white"
+                    d="m12,0C5.383,0,0,5.383,0,12s5.383,12,12,12,12-5.383,12-12S18.617,0,12,0Zm-.091,15.419c-.387.387-.896.58-1.407.58s-1.025-.195-1.416-.585l-2.782-2.696,1.393-1.437,2.793,2.707,5.809-5.701,1.404,1.425-5.793,5.707Z"
+                  />
+                </svg> {benefit}
               </li>
             ))}
           </ul>
 
           {/* Buttons */}
           <div className="mt-6 flex gap-4">
-            <button className="bg-white text-blue-700 px-6 py-2 rounded-lg font-semibold hover:bg-gray-200">
+            <button className="bg-white text-blue-700 px-10 py-4 rounded-full font-semibold hover:bg-gray-200">
               Learn More
             </button>
-            <button className="bg-gray-300 text-gray-800 px-6 py-2 rounded-lg font-semibold">
+            <button className="bg-[#69ABEA] text-white px-6 py-2 rounded-full font-semibold">
               Get Appointment
             </button>
           </div>
