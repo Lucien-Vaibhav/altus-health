@@ -130,19 +130,21 @@ export default function Header() {
 
         {/* Navigation Links */}
         <ul className="hidden md:flex space-x-6 text-blue-900 nav-menu">
-          {["Home", "About", "Blog", "Contact"].map((text, index) => (
+          {[
+            { text: "Home", path: "/" },
+            { text: "About Us", path: "/aboutus" },
+            { text: "Blogs", path: "/blogs" },
+            { text: "Contact Us", path: "/contactus" },
+          ].map((item, index) => (
             <li
-              key={text}
+              key={item.text}
               ref={(el) => {
                 navRefs.current[index] = el;
               }}
               className="relative font-bold hover:text-blue-600"
             >
-              <Link
-                href={`/${text.toLowerCase()}`}
-                className="hover:text-blue-600 font-bold"
-              >
-                {text}
+              <Link href={item.path} className="hover:text-blue-600 font-bold">
+                {item.text}
               </Link>
               <span className="nav-underline absolute left-0 bottom-0 h-0.5 bg-blue-600 opacity-0"></span>
             </li>
@@ -171,7 +173,7 @@ export default function Header() {
             </Link>
           ))}
           <Link href="/appointment">
-            <button className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700">
+            <button className="flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700">
               <FaRegCalendarAlt />
               <span>Make Appointment</span>
             </button>
