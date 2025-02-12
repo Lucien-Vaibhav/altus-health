@@ -27,9 +27,9 @@ export default function Employees() {
 
     return (
         <section ref={sectionRef} className="py-12 px-4 bg-gray-100 text-center">
-            <h3 className="text-sm text-green-600 font-semibold">Promising Best Quality Services</h3>
-            <h2 className="text-3xl font-bold text-gray-900 mt-2">
-                Our amazing <span className="text-blue-700">Specialists</span>
+            <h3 className="text-lg text-[#2ad2c1] font-semibold">Promising Best Quality Services</h3>
+            <h2 className="text-[40px] font-bold text-[#1d2864] mt-2">
+                Our Amazing Specialists
             </h2>
             <p className="text-gray-600 mt-2 max-w-xl mx-auto">
                 We have world-class pathologists & lab assistants equipped with the best machinery & reagents to ensure top-quality findings.
@@ -52,7 +52,7 @@ export default function Employees() {
                         {/* Hover Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end items-center p-6">
                             <div className="bg-white p-5 rounded-lg shadow-lg text-center w-11/12">
-                                <h4 className="text-sm text-green-600 font-medium">{person.role}</h4>
+                                <h4 className="text-sm text-[#2ad2c1] font-medium">{person.role}</h4>
                                 <h3 className="text-xl font-bold text-gray-900">{person.alt}</h3>
                                 <div className="flex justify-center gap-3 mt-3">
                                     <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">

@@ -43,14 +43,14 @@ export default function BlogPage() {
         <div className="relative z-10 flex flex-col justify-center h-full px-6 md:px-16">
           <div className="flex flex-col md:flex-row md:items-center justify-between">
             <h1 className="text-white text-3xl md:text-5xl font-bold">
-              About Us
+              Blogs 
             </h1>
             <nav className="text-white text-sm md:text-lg mt-2 md:mt-0">
               <Link href="/" className="hover:text-blue-400 transition">
                 Home
               </Link>
               <span className="mx-2">/</span>
-              <span className="text-blue-400">About Us</span>
+              <span className="text-blue-400">Blogs</span>
             </nav>
           </div>
         </div>

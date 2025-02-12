@@ -24,7 +24,7 @@ export default function AboutUsSection() {
   const secondaryHexRef = useRef<HTMLDivElement | null>(null);
   const secondaryImageRef = useRef<HTMLImageElement | null>(null);
   const counterRefs = useRef<(HTMLHeadingElement | null)[]>([]);
-
+  const experienceRef = useRef<HTMLSpanElement | null>(null);
   const listRefs = useRef([]);
 
   useEffect(() => {
@@ -36,6 +36,28 @@ export default function AboutUsSection() {
           trigger: breadcrumbRef.current,
           start: "top top",
           scrub: 1,
+        },
+      });
+    }
+
+    if (experienceRef.current) {
+      const animatedValue = { value: 0 };
+
+      gsap.to(animatedValue, {
+        value: 25,
+        duration: 3,
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: experienceRef.current,
+          start: "top 80%", // Starts animating when the element enters the viewport
+          toggleActions: "play none none none",
+        },
+        onUpdate: () => {
+          if (experienceRef.current) {
+            experienceRef.current.textContent = `${Math.round(
+              animatedValue.value
+            )}`;
+          }
         },
       });
     }
@@ -167,7 +189,6 @@ export default function AboutUsSection() {
           transition: "background-position 0.3s ease-out",
         }}
       >
-        <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative z-10 flex flex-col justify-center h-full px-6 md:px-16">
           <div className="flex flex-col md:flex-row md:items-center justify-between">
             <h1 className="text-white text-3xl md:text-5xl font-bold">
@@ -185,7 +206,7 @@ export default function AboutUsSection() {
       </div>
 
       {/* Image Slider */}
-      <div className="max-w-7xl mx-auto py-12 px-6 md:px-16 relative">
+      <div className="max-w-full mx-auto py-12 px-6 md:px-16 relative">
         <div className="relative">
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
@@ -195,7 +216,7 @@ export default function AboutUsSection() {
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             pagination={{ clickable: true }}
             navigation={{ nextEl: ".next-btn", prevEl: ".prev-btn" }}
-            className="rounded-lg overflow-hidden"
+            className="rounded-lg overflow-hidden w-full"
           >
             {["/slider1.jpg", "/slider-2.jpg", "/slider3.jpg"].map(
               (src, index) => (
@@ -203,9 +224,9 @@ export default function AboutUsSection() {
                   <Image
                     src={src}
                     alt={`Slide ${index + 1}`}
-                    width={1400}
-                    height={700}
-                    className="w-full h-[400px] md:h-[500px] object-cover rounded-lg"
+                    width={1600}
+                    height={800}
+                    className="w-full h-[500px] md:h-[600px] object-cover rounded-lg"
                   />
                 </SwiperSlide>
               )
@@ -218,6 +239,35 @@ export default function AboutUsSection() {
             ❯
           </button>
         </div>
+      </div>
+
+      {/* About Section */}
+      <div className="max-w-5xl mx-auto ">
+        <h2 className="text-3xl md:text-4xl font-bold text-[#1C2760]">
+          About Patholab Laboratory
+        </h2>
+        <p className="text-gray-600 mt-4 text-lg leading-relaxed">
+          We guide our clients through difficult issues, bringing insight and
+          judgment to each situation. Our innovative approaches create original
+          solutions to our clients' most complex domestic & multi-jurisdictional
+          deals and disputes. By thinking on behalf of our clients every day, we
+          anticipate what they want, provide what they need, and build lasting
+          relationships.
+        </p>
+        <p className="text-gray-600 mt-4 text-lg leading-relaxed">
+          Patholab is the best diagnostic lab in the city. I have great
+          experience with them. They provide authentic results & have the best
+          environment inside here. I highly recommend them.
+        </p>
+        <p className="text-[#3066E0] font-semibold text-lg mt-6">
+          Over the last 35 Years we made an impact that is strong & we have a
+          long way to go.
+        </p>
+        <p className="text-gray-600 mt-4 text-lg leading-relaxed">
+          Patholab is the best diagnostic lab in the city. I have great
+          experience with them. They provide authentic results & have the best
+          environment inside here. I highly recommend them.
+        </p>
       </div>
 
       {/* Main Content Section */}
@@ -290,8 +340,29 @@ export default function AboutUsSection() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="absolute bottom-8 left-8 bg-blue-500 text-white px-6 py-3 rounded-full font-bold text-xl">
-              25 YEARS EXPERIENCE
+            <div
+              className="absolute mt-[5%] top-[60%] left-6 w-40 h-40 bg-[#0071dc] flex flex-col items-center justify-center text-white font-bold text-sm"
+              style={{
+                maskImage: "url('/mask-banner2.png')",
+                WebkitMaskImage: "url('/mask-banner2.png')",
+                maskSize: "100% 100%",
+                maskRepeat: "no-repeat",
+                WebkitMaskRepeat: "no-repeat",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+              }}
+            >
+              <span
+                ref={experienceRef}
+                className="text-white font-bold text-3xl md:text-4xl"
+              >
+                0
+              </span>
+              <span className="text-white font-bold text-base md:text-lg text-center leading-tight">
+                YEARS EXPERIENCE
+              </span>
             </div>
           </div>
 
@@ -353,7 +424,7 @@ export default function AboutUsSection() {
                 if (el) counterRefs.current[index] = el;
               }}
               data-value={item.value}
-              className="text-4xl md:text-5xl font-bold text-blue-500"
+              className="text-4xl md:text-5xl font-bold text-[#2ad2c1]"
             >
               0
             </h2>

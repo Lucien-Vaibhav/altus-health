@@ -112,27 +112,27 @@ export default function BranchLocation() {
           {branches.map((branch, index) => (
             <div key={index} className="bg-white shadow-xl rounded-3xl p-8 w-full h-[500px]">
               {/* Title */}
-              <div className="bg-blue-200 text-blue-700 font-bold text-2xl py-3 px-6 rounded-t-2xl text-center">
+              <div className="bg-[#E1F6F9] text-[#2ad2c1] font-bold text-2xl py-3 px-6 rounded-t-2xl text-center">
                 {branch.name}
               </div>
 
               {/* Address */}
               <div className="mt-6">
-                <h4 className="text-xl font-bold text-gray-800">Our Address</h4>
+                <h4 className="text-xl font-bold text-[#1d2864]">Our Address</h4>
                 <p className="text-gray-600 mt-2 flex items-center gap-2">📍 {branch.address}</p>
               </div>
 
               {/* Contact Info */}
               <div className="mt-6">
-                <h4 className="text-xl font-bold text-gray-800">Contact Information</h4>
+                <h4 className="text-xl font-bold text-[#1d2864]">Contact Information</h4>
                 <p className="text-gray-600 mt-2 flex items-center gap-2">✉️ {branch.email}</p>
                 <p className="text-gray-600 mt-2 flex items-center gap-2">📞 {branch.phone}</p>
               </div>
 
               {/* Opening Hours */}
-              <div className="mt-8 flex items-center gap-5 bg-blue-100 p-6 rounded-2xl">
+              <div className="mt-8 flex items-center gap-5  p-6 rounded-2xl">
                 {/* Rotating Timer Image with Square Background */}
-                <div className="w-16 h-16 bg-blue-400 rounded-2xl flex items-center justify-center">
+                <div className="w-16 h-16 bg-[#2ad2c1] rounded-2xl flex items-center justify-center">
                   <img
                     ref={(el) => {
                       timerRefs.current[index] = el;
