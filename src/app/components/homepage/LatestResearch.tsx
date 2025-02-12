@@ -84,7 +84,7 @@ export default function LatestResearch() {
                     <img
                       src="/user.png"
                       alt="Author"
-                      className="w-8 h-8 rounded-full object-cover"
+                      className="w-6 h-6 rounded-full object-cover"
                     />
                     <span className="text-gray-600 text-md font-medium">
                       Rayan Kellar

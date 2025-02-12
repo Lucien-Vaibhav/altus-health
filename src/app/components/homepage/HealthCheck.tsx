@@ -169,14 +169,42 @@ export default function HealthCheckSection() {
                   tabsRef.current[index] = el;
                 }
               }}
-              className={`relative px-6 py-2 rounded-full border-2 transition-colors duration-200 ${
+              className={`relative px-6 py-2 rounded-full border-2 overflow-hidden transition-colors duration-300 ${
                 activeTab === tab
                   ? "border-blue-600 bg-blue-600 text-white"
                   : "border-blue-200 text-blue-600"
               }`}
+              onMouseEnter={() => {
+                gsap.to(tabsRef.current[index].querySelector(".hover-bg"), {
+                  x: "0%",
+                  duration: 0.1,
+                  ease: "power2.out",
+                });
+                gsap.to(tabsRef.current[index].querySelector(".tab-text"), {
+                  color: "#ffffff",
+                  duration: 0.1,
+                });
+              }}
+              onMouseLeave={() => {
+                gsap.to(tabsRef.current[index].querySelector(".hover-bg"), {
+                  x: "-100%",
+                  duration: 0.1,
+                  ease: "power2.out",
+                });
+                gsap.to(tabsRef.current[index].querySelector(".tab-text"), {
+                  color: "#2563eb",
+                  duration: 0.1,
+                });
+              }}
               onClick={() => setActiveTab(tab)}
             >
-              {tab}
+              {/* Hover Animation Overlay */}
+              <span className="absolute inset-0 bg-blue-600 hover-bg -translate-x-full transition-transform duration-500"></span>
+
+              {/* Text (wrapped to apply animation separately) */}
+              <span className="relative z-10 tab-text transition-colors duration-300">
+                {tab}
+              </span>
             </button>
           ))}
         </div>
