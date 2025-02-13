@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import {
   FaFacebookF,
@@ -9,17 +9,25 @@ import {
   FaInstagram,
   FaPinterestP,
   FaRegCalendarAlt,
+  FaBars,
 } from "react-icons/fa";
-import { MdPhone, MdEmail, MdLocationOn } from "react-icons/md";
+import { MdPhone, MdEmail, MdLocationOn, MdClose } from "react-icons/md";
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerRef = useRef(null);
   const clockRef = useRef<SVGSVGElement | null>(null);
   const navRefs = useRef<(HTMLLIElement | null)[]>([]);
-  const socialIconsRef = useRef<(HTMLAnchorElement | null)[]>([]);
+  const socialRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+
+  const menuItems = [
+    { text: "Home", path: "/" },
+    { text: "About Us", path: "/aboutus" },
+    { text: "Blogs", path: "/blogs" },
+    { text: "Contact Us", path: "/contactus" },
+  ];
 
   useEffect(() => {
-    // Header animation
     gsap.from(headerRef.current, {
       y: -50,
       opacity: 0,
@@ -36,36 +44,33 @@ export default function Header() {
       transformOrigin: "center",
     });
 
-    // GSAP Nav Link Underline Animation
     navRefs.current.forEach((navItem) => {
-      if (navItem) {
-        const underline = navItem.querySelector(".nav-underline");
+      if (!navItem) return;
+      const underline = navItem.querySelector(".nav-underline");
 
-        navItem.addEventListener("mouseenter", () => {
-          gsap.fromTo(
-            underline,
-            { width: "0%", left: 0, opacity: 1 },
-            { width: "100%", duration: 0.3, ease: "power2.out" }
-          );
-        });
+      navItem.addEventListener("mouseenter", () => {
+        gsap.fromTo(
+          underline,
+          { width: "0%", left: 0, opacity: 1 },
+          { width: "100%", duration: 0.3, ease: "power2.out" }
+        );
+      });
 
-        navItem.addEventListener("mouseleave", () => {
-          gsap.to(underline, {
-            width: "100%",
-            left: "100%",
-            opacity: 0,
-            duration: 0.3,
-            ease: "power2.out",
-          });
+      navItem.addEventListener("mouseleave", () => {
+        gsap.to(underline, {
+          width: "100%",
+          left: "100%",
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.out",
         });
-      }
+      });
     });
 
-    // Social Icons Reveal Animation
-    gsap.from(socialIconsRef.current, {
+    gsap.from(socialRefs.current, {
       opacity: 0,
       y: 20,
-      stagger: 0.2, // Adds delay between each icon's animation
+      stagger: 0.2,
       duration: 0.8,
       ease: "power3.out",
     });
@@ -74,7 +79,7 @@ export default function Header() {
   return (
     <header ref={headerRef} className="w-full">
       {/* Top Bar */}
-      <div className="bg-blue-900 text-white text-sm py-4 px-4 flex justify-between items-center whitespace-nowrap">
+      <div className="hidden md:flex bg-blue-900 text-white text-sm py-4 px-4 justify-between items-center">
         <div className="flex items-center space-x-6">
           <span>
             BOOK <strong>FREE</strong> HOME COLLECTION
@@ -115,7 +120,6 @@ export default function Header() {
 
       {/* Main Navbar */}
       <nav className="bg-white shadow-md py-4 px-6 flex justify-between items-center">
-        {/* Logo Section */}
         <div className="w-60 h-auto">
           <Link href="/">
             <Image
@@ -128,18 +132,21 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Navigation Links */}
+        {/* Hamburger Menu Button - Mobile Only */}
+        <button
+          className="md:hidden text-blue-900 text-2xl"
+          onClick={() => setIsMenuOpen(true)}
+        >
+          <FaBars />
+        </button>
+
+        {/* Desktop Navigation */}
         <ul className="hidden md:flex space-x-6 text-blue-900 nav-menu">
-          {[
-            { text: "Home", path: "/" },
-            { text: "About Us", path: "/aboutus" },
-            { text: "Blogs", path: "/blogs" },
-            { text: "Contact Us", path: "/contactus" },
-          ].map((item, index) => (
+          {menuItems.map((item, index) => (
             <li
               key={item.text}
               ref={(el) => {
-                navRefs.current[index] = el;
+                if (el) navRefs.current[index] = el;
               }}
               className="relative font-bold hover:text-blue-600"
             >
@@ -151,35 +158,53 @@ export default function Header() {
           ))}
         </ul>
 
-        {/* Social Icons + Button */}
-        <div className="flex space-x-4 items-center">
+        {/* Social Icons & Button */}
+        <div className="hidden md:flex space-x-4 items-center">
           {[
-            { icon: <FaFacebookF />, link: "https://facebook.com" },
-            { icon: <FaTwitter />, link: "https://twitter.com" },
-            { icon: <FaInstagram />, link: "https://instagram.com" },
-            { icon: <FaPinterestP />, link: "https://pinterest.com" },
+            { icon: <FaFacebookF />, href: "#" },
+            { icon: <FaTwitter />, href: "#" },
+            { icon: <FaInstagram />, href: "#" },
+            { icon: <FaPinterestP />, href: "#" },
           ].map((social, index) => (
             <Link
               key={index}
-              href={social.link}
-              target="_blank"
+              href={social.href}
               ref={(el) => {
-                socialIconsRef.current[index] = el;
+                if (el) socialRefs.current[index] = el;
               }}
             >
-              <span className="text-blue-900 cursor-pointer hover:text-blue-600">
-                {social.icon}
-              </span>
+              {social.icon}
             </Link>
           ))}
           <Link href="/appointment">
-            <button className="flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700">
+            <button className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 flex items-center space-x-2">
               <FaRegCalendarAlt />
               <span>Make Appointment</span>
             </button>
           </Link>
         </div>
       </nav>
+      
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[9999] flex justify-end">
+          <div className="bg-white w-3/4 max-w-xs h-full shadow-lg p-6 flex flex-col relative">
+            <button
+              className="text-blue-900 text-2xl self-end"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <MdClose />
+            </button>
+            <ul className="mt-8 space-y-4 text-blue-900 text-lg">
+              {menuItems.map((item) => (
+                <li key={item.text} className="font-bold hover:text-blue-600">
+                  <Link href={item.path}>{item.text}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

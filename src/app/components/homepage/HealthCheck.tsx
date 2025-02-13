@@ -130,71 +130,47 @@ export default function HealthCheckSection() {
   const tabsRef = useRef<HTMLButtonElement[]>([]);
 
   useEffect(() => {
-    // Card animations
     cardsRef.current.forEach((card, index) => {
       if (card) {
-        gsap.fromTo(
-          card,
-          { opacity: 0, y: 50 },
-          { opacity: 1, y: 0, duration: 0.5, delay: index * 0.2 }
-        );
+        gsap.fromTo(card, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5, delay: index * 0.2 });
       }
     });
   }, [activeTab]);
 
   return (
-    <div className="bg-gray-100 py-16 px-4">
+    <div className="bg-gray-100 py-12 px-4">
       <div className="container mx-auto text-center">
+        {/* Header */}
         <div className="mb-10">
-          <p className="text-blue-600 font-semibold text-lg mb-2">
-            Complete Health Care Laboratory Services
-          </p>
-          <h2 className="text-5xl font-bold mb-4 text-[#1d2864]">
-            Be healthy with our Patholab health <br />
+          <p className="text-blue-600 font-semibold text-lg mb-2">Complete Health Care Laboratory Services</p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-[#1d2864]">
+            Be healthy with our Patholab health <br className="hidden md:block" />
             check-up packages!
           </h2>
-          <p className="text-[#6f7f90] text-[20px]">
+          <p className="text-[#6f7f90] text-[18px] md:text-[20px]">
             Complete body check-ups starting from{" "}
             <span className="text-[#0071dc] font-bold">$500/-</span>
           </p>
         </div>
 
         {/* Tabs */}
-        <div className="flex justify-center gap-4 mb-8">
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-8">
           {Object.keys(packages).map((tab, index) => (
             <button
               key={tab}
               ref={(el) => {
-                if (el) {
-                  tabsRef.current[index] = el;
-                }
+                if (el) tabsRef.current[index] = el;
               }}
-              className={`relative px-6 py-2 rounded-full border-2 overflow-hidden transition-colors duration-300 ${
-                activeTab === tab
-                  ? "border-blue-600 bg-blue-600 text-white"
-                  : "border-blue-200 text-blue-600"
+              className={`relative px-5 py-2 rounded-full border-2 overflow-hidden transition-colors duration-300 text-sm md:text-base ${
+                activeTab === tab ? "border-blue-600 bg-blue-600 text-white" : "border-blue-200 text-blue-600"
               }`}
               onMouseEnter={() => {
-                gsap.to(tabsRef.current[index].querySelector(".hover-bg"), {
-                  x: "0%",
-                  duration: 0.1,
-                  ease: "power2.out",
-                });
-                gsap.to(tabsRef.current[index].querySelector(".tab-text"), {
-                  color: "#ffffff",
-                  duration: 0.1,
-                });
+                gsap.to(tabsRef.current[index].querySelector(".hover-bg"), { x: "0%", duration: 0.1, ease: "power2.out" });
+                gsap.to(tabsRef.current[index].querySelector(".tab-text"), { color: "#ffffff", duration: 0.1 });
               }}
               onMouseLeave={() => {
-                gsap.to(tabsRef.current[index].querySelector(".hover-bg"), {
-                  x: "-100%",
-                  duration: 0.1,
-                  ease: "power2.out",
-                });
-                gsap.to(tabsRef.current[index].querySelector(".tab-text"), {
-                  color: "#2563eb",
-                  duration: 0.1,
-                });
+                gsap.to(tabsRef.current[index].querySelector(".hover-bg"), { x: "-100%", duration: 0.1, ease: "power2.out" });
+                gsap.to(tabsRef.current[index].querySelector(".tab-text"), { color: "#2563eb", duration: 0.1 });
               }}
               onClick={() => setActiveTab(tab)}
             >
@@ -202,22 +178,15 @@ export default function HealthCheckSection() {
               <span className="absolute inset-0 bg-blue-600 hover-bg -translate-x-full transition-transform duration-500"></span>
 
               {/* Text (wrapped to apply animation separately) */}
-              <span className="relative z-10 tab-text transition-colors duration-300">
-                {tab}
-              </span>
+              <span className="relative z-10 tab-text transition-colors duration-300">{tab}</span>
             </button>
           ))}
         </div>
 
         {/* Package Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
           {packages[activeTab].map((pkg, index) => (
-            <HealthCards
-              key={index}
-              pkg={pkg}
-              index={index}
-              cardsRef={cardsRef}
-            />
+            <HealthCards key={index} pkg={pkg} index={index} cardsRef={cardsRef} />
           ))}
         </div>
       </div>

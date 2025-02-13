@@ -25,7 +25,7 @@ const AwardsSection = () => {
 
     if (awardsRef.current) {
       gsap.fromTo(
-        awardsRef.current.children, // Fixed to avoid undefined issue
+        awardsRef.current.children,
         { opacity: 0, y: 50 },
         {
           opacity: 1,
@@ -68,7 +68,7 @@ const AwardsSection = () => {
           <p className="text-[#0071dc] text-[18px] font-semibold">
             Promising Best Quality Services
           </p>
-          <h2 className="text-[42px]  font-bold text-[#1d2864]">
+          <h2 className="text-[42px] font-bold text-[#1d2864]">
             We have got prestigious <br />
             awards for our work
           </h2>
@@ -101,17 +101,20 @@ const AwardsSection = () => {
             family member has a condition.
           </p>
 
-          {/* Award Images in 3 Columns x 2 Rows */}
-          <div ref={awardsRef} className="grid grid-cols-3 gap-6">
+          {/* Award Images */}
+          <div
+            ref={awardsRef}
+            className="grid grid-cols-2 md:grid-cols-3 gap-6"
+          >
             {awards.map((award, index) => (
               <div
                 key={index}
-                className="p-6  bg-gray-50 flex justify-center items-center"
+                className="p-6 bg-gray-50 flex justify-center items-center"
               >
                 <img
                   src={award}
                   alt={`Award ${index + 1}`}
-                  className="w-[100%] h-[100%] object-contain"
+                  className="w-[140%] h-[140%] md:w-[120%] md:h-[120%] object-contain"
                 />
               </div>
             ))}

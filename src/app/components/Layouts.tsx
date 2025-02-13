@@ -6,12 +6,12 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-export default function Layout({ children}:LayoutProps ) {
+export default function Layout({ children }: LayoutProps) {
   return (
-    <div>
-      <Header/>
-      <main>{children}</main>
-      <Footer/>
+    <div className="relative z-0">
+        <Header />
+      <main className="relative z-0">{children}</main>
+      <Footer />
     </div>
   );
 }
