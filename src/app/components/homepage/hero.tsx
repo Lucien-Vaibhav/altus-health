@@ -43,13 +43,13 @@ export default function Hero() {
         </div>
 
         {/* Man's Image - Mobile on Top, Desktop Normal */}
-        <div className="relative z-10 md:mt-0">
+        <div className="relative z-10 md:mt-10">
           <Image
             src="/man.png"
             alt="Smiling Man"
             width={500}
             height={500}
-            className="w-full h-auto md:w-auto md:h-auto"
+            className="w-full h-auto md:w-[500px] md:h-[600px]"
             priority
           />
         </div>
