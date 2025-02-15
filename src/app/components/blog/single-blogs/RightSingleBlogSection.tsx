@@ -14,7 +14,7 @@ export default function RightSingleBlogSection() {
   }, []);
 
   return (
-    <div ref={rightRef} className="w-full p-6 space-y-6">
+    <div ref={rightRef} className="w-full p-2 md:p-6 space-y-6">
       <AboutAuthor />
       <Categories />
       <RecentPosts />
