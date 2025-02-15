@@ -8,29 +8,37 @@ export default function Hero() {
   const contentRef = useRef(null);
 
   useEffect(() => {
-    gsap.set(contentRef.current, { opacity: 1 });
+    if (typeof window === "undefined") return; // Ensure it's running in the browser
 
-    gsap.to(circleRef.current, {
-      rotate: 360,
-      duration: 10,
-      repeat: -1,
-      ease: "linear",
+    const ctx = gsap.context(() => {
+      if (!circleRef.current || !contentRef.current) return;
+
+      gsap.set(contentRef.current, { opacity: 1 });
+
+      gsap.to(circleRef.current, {
+        rotate: 360,
+        duration: 10,
+        repeat: -1,
+        ease: "linear",
+      });
+
+      gsap.fromTo(
+        contentRef.current,
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6 }
+      );
     });
 
-    gsap.fromTo(
-      contentRef.current,
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6 }
-    );
+    return () => ctx.revert(); // Cleanup animations on unmount
   }, []);
 
   return (
     <section
-      className="relative w-full bg-[#EAF2FF] py-20 px-6 md:px-12 lg:px-24 flex flex-col md:flex-row items-center text-center md:text-left gap-12 md:gap-16 "
+      className="relative w-full bg-[#EAF2FF] py-20 px-6 md:px-12 lg:px-24 flex flex-col md:flex-col lg:flex-row items-center text-center md:text-left gap-12 md:gap-16"
       style={{ background: "radial-gradient(circle at 20% 50%,#FFF,#c3e0fe)" }}
     >
       {/* Man's Image - Mobile on Top, Desktop as it is */}
-      <div className="relative w-full max-w-lg md:max-w-xl flex justify-center md:justify-end order-1 md:order-none ">
+      <div className="relative w-full max-w-lg md:max-w-xl flex justify-center md:justify-end order-1">
         {/* Rotating Circle - Visible on All Screens */}
         <div ref={circleRef} className="absolute w-[500px] h-[500px]">
           <Image
@@ -42,7 +50,7 @@ export default function Hero() {
           />
         </div>
 
-        {/* Man's Image - Mobile on Top, Desktop Normal */}
+        {/* Man's Image */}
         <div className="relative z-10 md:mt-10">
           <Image
             src="/man.png"
@@ -58,7 +66,7 @@ export default function Hero() {
       {/* Left Side (Content) */}
       <div
         ref={contentRef}
-        className="w-full max-w-3xl flex flex-col justify-center order-2 md:order-none"
+        className="w-full max-w-3xl flex flex-col justify-center order-2"
       >
         <h1 className="text-3xl md:text-5xl font-bold text-[#1d2864] leading-tight">
           Track all the crucial health parameters <br />

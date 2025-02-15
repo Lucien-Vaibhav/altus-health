@@ -77,8 +77,8 @@ export default function BenefitsSection() {
 
       {/* Desktop: Grid layout (Hexagons Left, Benefits Card Right) */}
       {!isMobile ? (
-        <div className="relative max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-start">
-          {/* Left Side: Hexagonal Grid */}
+        <div className="relative max-w-7xl mx-auto flex flex-col items-center space-y-10 md:space-y-12">
+          {/* Hexagonal Grid */}
           <div className="flex flex-col items-center space-y-6">
             <div className="flex space-x-6">
               {benefits.slice(0, 3).map((item, index) => (

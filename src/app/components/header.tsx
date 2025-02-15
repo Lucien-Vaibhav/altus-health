@@ -81,7 +81,7 @@ export default function Header() {
     
     <header ref={headerRef} className="relative w-full z-[999]">
       {/* Top Bar */}
-      <div className="hidden md:flex bg-blue-900 text-white text-sm py-4 px-4 justify-between items-center">
+      <div className="hidden md:flex flex-wrap bg-blue-900 text-white text-xs md:text-sm py-3 px-4 justify-between items-center gap-x-4">
         <div className="flex items-center space-x-6">
           <span>
             BOOK <strong>FREE</strong> HOME COLLECTION
@@ -121,7 +121,7 @@ export default function Header() {
       </div>
 
       {/* Main Navbar */}
-      <nav className="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+      <nav className="bg-white shadow-md py-4 px-4 lg:px-6 flex items-center w-full">
         <div className="w-60 h-auto">
           <Link href="/">
             <Image
@@ -133,17 +133,17 @@ export default function Header() {
             />
           </Link>
         </div>
-
+        <div className="flex-1"></div>
         {/* Hamburger Menu Button - Mobile Only */}
         <button
-          className="md:hidden text-blue-900 text-2xl"
+          className="lg:hidden text-blue-900 text-2xl ml-auto"
           onClick={() => setIsMenuOpen(true)}
         >
           <FaBars />
         </button>
 
         {/* Desktop Navigation */}
-        <ul className="hidden md:flex space-x-6 text-blue-900 nav-menu">
+        <ul className="hidden lg:flex space-x-6 text-blue-900 nav-menu">
           {menuItems.map((item, index) => (
             <li
               key={item.text}
@@ -179,7 +179,7 @@ export default function Header() {
             </Link>
           ))}
           <Link href="/appointment">
-            <button className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 flex items-center space-x-2">
+            <button className="hidden lg:flex bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 items-center space-x-2">
               <FaRegCalendarAlt />
               <span>Make Appointment</span>
             </button>
