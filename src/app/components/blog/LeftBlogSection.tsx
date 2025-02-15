@@ -9,7 +9,7 @@ export default function BlogSection() {
   const { blogs } = useBlog();
 
   return (
-    <div className="w-full md:w-3/4 p-8 space-y-16 ml-6 h-[170vh] overflow-y-auto scrollbar-hide">
+    <div className="w-full md:w-3/4 p-8 space-y-16 md:ml-6 h-[170vh] overflow-y-auto scrollbar-hide">
       {blogs.map((post) => (
         <BlogCard key={post.id} post={post} />
       ))}
