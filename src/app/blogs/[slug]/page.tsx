@@ -47,8 +47,8 @@ export default function BlogDetails() {
   }
 
   return (
-    <section className="p-8 flex flex-col md:flex-row justify-between gap-1 h-screen bg-transparent">
-      <div className="md:w-[75%] h-full overflow-y-auto scroll-smooth bg-transparent p-4">
+    <section className="p-2 md:p-8 flex flex-col md:flex-row justify-between gap-1 h-screen bg-transparent">
+      <div className="w-full md:w-[75%] h-full overflow-y-auto scroll-smooth bg-transparent p-4">
         <p className="mt-2 text-gray-500">
           By {blog.author} | {blog.date}
         </p>
@@ -191,7 +191,7 @@ export default function BlogDetails() {
         </div>
       </div>
 
-      <div className="w-1/4 h-full overflow-y-auto scroll-smooth bg-transparent p-4">
+      <div className="w-full md:w-1/4 h-full overflow-y-auto scroll-smooth bg-transparent p-4">
         <RightSingleBlogSection />
       </div>
     </section>

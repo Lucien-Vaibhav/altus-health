@@ -2,10 +2,10 @@ import React from "react";
 
 const CommentSection = () => {
   return (
-    <div className="w-full bg-gray-100 py-12 px-6">
+    <div className="w-full bg-gray-100 py-12 px-0 md:px-6">
       <div className="max-w-5xl mx-auto bg-white p-8 ">
         <h2 className="text-[48px] font-bold text-[#1d2864] mb-4 text-left">
-          Leave A Comment
+          Leave a Comment
         </h2>
         <p className="text-gray-600 mb-6 text-left">
           Your email address will not be published *

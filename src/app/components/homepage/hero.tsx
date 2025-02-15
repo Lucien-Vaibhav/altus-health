@@ -26,7 +26,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative w-full bg-[#EAF2FF] py-20 px-6 md:px-12 lg:px-24 flex flex-col md:flex-row items-center text-center md:text-left gap-12 md:gap-16"
+      className="relative w-full bg-[#EAF2FF] py-20 px-6 md:px-12 lg:px-24 flex flex-col md:flex-row items-center text-center md:text-left gap-12 md:gap-16 "
       style={{ background: "radial-gradient(circle at 20% 50%,#FFF,#c3e0fe)" }}
     >
       {/* Man's Image - Mobile on Top, Desktop as it is */}

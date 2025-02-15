@@ -11,7 +11,7 @@ import {
   FaRegCalendarAlt,
   FaBars,
 } from "react-icons/fa";
-import { MdPhone, MdEmail, MdLocationOn, MdClose } from "react-icons/md";
+import { MdPhone, MdEmail, MdLocationOn, MdClose, MdArrowDropDown } from "react-icons/md";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -77,7 +77,9 @@ export default function Header() {
   }, []);
 
   return (
-    <header ref={headerRef} className="w-full">
+    <>
+    
+    <header ref={headerRef} className="relative w-full z-[999]">
       {/* Top Bar */}
       <div className="hidden md:flex bg-blue-900 text-white text-sm py-4 px-4 justify-between items-center">
         <div className="flex items-center space-x-6">
@@ -184,27 +186,52 @@ export default function Header() {
           </Link>
         </div>
       </nav>
-      
+
+    </header>
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-[9999] flex justify-end">
-          <div className="bg-white w-3/4 max-w-xs h-full shadow-lg p-6 flex flex-col relative">
-            <button
-              className="text-blue-900 text-2xl self-end"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <MdClose />
-            </button>
-            <ul className="mt-8 space-y-4 text-blue-900 text-lg">
-              {menuItems.map((item) => (
-                <li key={item.text} className="font-bold hover:text-blue-600">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[999] flex justify-end">
+          <div className="bg-white w-3/4 max-w-full h-full shadow-lg p-6 flex flex-col fixed">
+            {/* Logo & Close Button */}
+            <div className="flex justify-between items-center mb-6">
+              <Image src="/logo-blue.png" alt="Patholab Logo" width={150} height={40} priority />
+              <button className="text-blue-900 text-2xl" onClick={() => setIsMenuOpen(false)}>
+                <MdClose />
+              </button>
+            </div>
+
+            {/* Navigation Links */}
+            <ul className="mt-2 space-y-4 text-blue-900 text-lg font-bold">
+              {menuItems.map((item, index) => (
+                <li key={item.text} className="flex justify-between items-center">
                   <Link href={item.path}>{item.text}</Link>
+                  {index !== 0 && (
+                    <button className="text-blue-600">
+                      <MdArrowDropDown size={24} />
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
+
+            {/* Contact Information */}
+            <div className="mt-auto space-y-3 text-sm text-blue-900">
+              <div className="flex items-center space-x-2">
+                <MdPhone size={18} />
+                <span>+55 (9900) 666 22</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <MdEmail size={18} />
+                <span>patholab@gmail.com</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <MdLocationOn size={18} />
+                <span>Office open 10AM - 17PM</span>
+              </div>
+            </div>
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 }

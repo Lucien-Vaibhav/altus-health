@@ -11,7 +11,6 @@ const DoctorBanner = () => {
         backgroundRepeat: "no-repeat",
       }} // Add background image
     >
-
       <div className="relative md:w-1/2 p-2">
         <h2 className="text-3xl font-bold text-gray-800">
           Dedicated Professionals & <br /> Doctors Recommend Us
@@ -23,11 +22,11 @@ const DoctorBanner = () => {
         </p>
 
         {/* Buttons */}
-        <div className="mt-6 flex gap-4">
-          <button className="bg-[#25BCCF] text-white px-6 py-3 rounded-full font-semibold shadow-md hover:bg-green-600 transition">
+        <div className="mt-6 flex gap-3 items-center">
+          <button className="bg-[#25BCCF] text-white px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold shadow-md hover:bg-[#1AA3B0] transition min-w-[130px] text-sm md:text-base text-center">
             Get Patholab Services
           </button>
-          <button className="border text-black bg-white border-gray-400 px-6 py-3 rounded-full font-semibold shadow-md hover:bg-gray-100 transition">
+          <button className="border border-gray-400 bg-white text-black px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold shadow-md hover:bg-gray-100 transition min-w-[130px] text-sm md:text-base text-center">
             Book A Home Visit
           </button>
         </div>

@@ -60,9 +60,12 @@ const branches = [
   },
 ];
 
+
 export default function BranchLocation() {
-  const timerRefs = useRef<(HTMLImageElement | null)[]>(new Array(branches.length).fill(null));
+  const timerRefs = useRef<(HTMLImageElement | null)[]>([]);
   const mapRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.to(timerRefs.current, {
@@ -72,8 +75,21 @@ export default function BranchLocation() {
       ease: "linear",
       force3D: true,
       overwrite: "auto",
-      invalidateOnRefresh: true,
     });
+
+    // GSAP Fade-in Animation for Branch Cards
+    gsap.fromTo(
+      cardRefs.current,
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power2.out" }
+    );
+
+    // GSAP Fade-in Animation for Google Map
+    gsap.fromTo(
+      mapContainerRef.current,
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 1, delay: 0.5, ease: "power2.out" }
+    );
   }, []);
 
   useEffect(() => {
@@ -94,12 +110,14 @@ export default function BranchLocation() {
     };
 
     if (!window.google || !window.google.maps) {
-      const script = document.createElement("script");
-      script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAzWsHhwsYapR9xLcmVu9ziAOpQ5d9ZpjI&callback=initMap`;
-      script.async = true;
-      script.defer = true;
-      script.onload = loadGoogleMaps;
-      document.head.appendChild(script);
+      if (!document.querySelector('script[src*="maps.googleapis.com"]')) {
+        const script = document.createElement("script");
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAzWsHhwsYapR9xLcmVu9ziAOpQ5d9ZpjI&callback=initMap`;
+        script.async = true;
+        script.defer = true;
+        script.onload = loadGoogleMaps;
+        document.head.appendChild(script);
+      }
     } else {
       loadGoogleMaps();
     }
@@ -107,46 +125,54 @@ export default function BranchLocation() {
 
   return (
     <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-8">
-        <div className="grid md:grid-cols-3 gap-6">
+      <div className="container mx-auto px-4 md:px-8">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {branches.map((branch, index) => (
-            <div key={index} className="bg-white shadow-xl rounded-3xl p-8 w-full h-[500px]">
+            <div
+              key={index}
+              ref={(el) => {
+                cardRefs.current[index] = el;
+              }}
+              className="bg-white shadow-xl rounded-3xl p-6 w-full h-auto transition-transform transform hover:scale-105"
+            >
               {/* Title */}
-              <div className="bg-[#E1F6F9] text-[#2ad2c1] font-bold text-2xl py-3 px-6 rounded-t-2xl text-center">
+              <div className="bg-[#E1F6F9] text-[#2ad2c1] font-bold text-xl sm:text-lg py-3 px-6 rounded-t-2xl text-center">
                 {branch.name}
               </div>
 
               {/* Address */}
-              <div className="mt-6">
-                <h4 className="text-xl font-bold text-[#1d2864]">Our Address</h4>
-                <p className="text-gray-600 mt-2 flex items-center gap-2">📍 {branch.address}</p>
+              <div className="mt-4">
+                <h4 className="text-lg font-bold text-[#1d2864]">Our Address</h4>
+                <p className="text-gray-600 mt-2 flex items-center gap-2">
+                  📍 {branch.address}
+                </p>
               </div>
 
               {/* Contact Info */}
-              <div className="mt-6">
-                <h4 className="text-xl font-bold text-[#1d2864]">Contact Information</h4>
+              <div className="mt-4">
+                <h4 className="text-lg font-bold text-[#1d2864]">Contact Information</h4>
                 <p className="text-gray-600 mt-2 flex items-center gap-2">✉️ {branch.email}</p>
                 <p className="text-gray-600 mt-2 flex items-center gap-2">📞 {branch.phone}</p>
               </div>
 
               {/* Opening Hours */}
-              <div className="mt-8 flex items-center gap-5  p-6 rounded-2xl">
+              <div className="mt-6 flex items-center gap-4 p-4 rounded-2xl bg-gray-100">
                 {/* Rotating Timer Image with Square Background */}
-                <div className="w-16 h-16 bg-[#2ad2c1] rounded-2xl flex items-center justify-center">
+                <div className="w-14 h-14 bg-[#2ad2c1] rounded-xl flex items-center justify-center">
                   <img
-                    ref={(el) => {
-                      timerRefs.current[index] = el;
-                    }}
+                   ref={(el) => {
+                    timerRefs.current[index] = el;
+                  }}
                     src="/clock.png"
-                    alt="Timer"
-                    className="w-12 h-12"
+                    alt="Opening Hours Icon"
+                    className="w-10 h-10"
                   />
                 </div>
 
                 <div>
-                  <h4 className="text-xl font-bold text-gray-800">Opening Hour</h4>
-                  <p className="text-gray-700 text-lg">{branch.hours}</p>
-                  <p className="text-red-600 text-lg font-medium">{branch.closed}</p>
+                  <h4 className="text-lg font-bold text-gray-800">Opening Hour</h4>
+                  <p className="text-gray-700">{branch.hours}</p>
+                  <p className="text-red-600 font-medium">{branch.closed}</p>
                 </div>
               </div>
             </div>
@@ -154,9 +180,9 @@ export default function BranchLocation() {
         </div>
 
         {/* Google Map Section */}
-        <div className="mt-16">
+        <div ref={mapContainerRef} className="mt-16">
           <h2 className="text-3xl font-bold text-gray-800 text-center">Our Locations</h2>
-          <div ref={mapRef} className="w-full h-[800px] mt-6"></div>
+          <div ref={mapRef} className="w-full h-[500px] mt-6 rounded-xl shadow-md"></div>
         </div>
       </div>
     </section>
