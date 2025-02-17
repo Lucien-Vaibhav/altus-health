@@ -6,10 +6,10 @@ import gsap from "gsap";
 
 export default function BenefitsSection() {
   const microscopeRef = useRef<HTMLDivElement | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isTabletOrMobile, setIsTabletOrMobile] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsTabletOrMobile(window.innerWidth < 768);
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -75,75 +75,47 @@ export default function BenefitsSection() {
         }}
       ></div>
 
-      {/* Desktop: Grid layout (Hexagons Left, Benefits Card Right) */}
-      {!isMobile ? (
-        <div className="relative max-w-7xl mx-auto flex flex-col items-center space-y-10 md:space-y-12">
-          {/* Hexagonal Grid */}
-          <div className="flex flex-col items-center space-y-6">
-            <div className="flex space-x-6">
-              {benefits.slice(0, 3).map((item, index) => (
-                <div
-                  key={index}
-                  className="hexagon flex flex-col items-center justify-center"
-                >
-                  <Image
-                    src={item.icon}
-                    alt={item.title}
-                    width={80}
-                    height={80}
-                  />
-                  <h3 className="text-[14px] font-semibold mt-3 text-[#1d2864]">
-                    {item.title}
-                  </h3>
-                  <p className="text-[10px] text-[#6f7f90]">{item.subtitle}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex space-x-6 mt-[-40px]">
-              {benefits.slice(3, 5).map((item, index) => (
-                <div
-                  key={index}
-                  className="hexagon flex flex-col items-center justify-center"
-                >
-                  <Image
-                    src={item.icon}
-                    alt={item.title}
-                    width={50}
-                    height={50}
-                  />
-                  <h3 className="text-md font-semibold mt-3 text-black">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-gray-500">{item.subtitle}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-[-40px]">
-              <div className="hexagon flex flex-col items-center justify-center">
+      <div className="relative max-w-7xl mx-auto flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-10 lg:space-y-0">
+        {/* Hexagon Grid */}
+        <div
+          className={`flex ${
+            isTabletOrMobile
+              ? "flex-col items-center space-y-6"
+              : "flex-col items-center space-y-6"
+          }`}
+        >
+          {/* First Row */}
+          <div
+            className={`flex ${
+              isTabletOrMobile ? "flex-col space-y-6" : "space-x-6"
+            }`}
+          >
+            {benefits.slice(0, 3).map((item, index) => (
+              <div
+                key={index}
+                className="hexagon flex flex-col items-center justify-center"
+              >
                 <Image
-                  src={benefits[5].icon}
-                  alt={benefits[5].title}
-                  width={50}
-                  height={50}
+                  src={item.icon}
+                  alt={item.title}
+                  width={80}
+                  height={80}
                 />
-                <h3 className="text-md font-semibold mt-3 text-black">
-                  {benefits[5].title}
+                <h3 className="text-[14px] font-semibold mt-3 text-[#1d2864]">
+                  {item.title}
                 </h3>
-                <p className="text-sm text-gray-500">{benefits[5].subtitle}</p>
+                <p className="text-[10px] text-[#6f7f90]">{item.subtitle}</p>
               </div>
-            </div>
+            ))}
           </div>
 
-          {/* Right Side: Benefits Box */}
-          <BenefitsCard microscopeRef={microscopeRef} />
-        </div>
-      ) : (
-        // Mobile: Hexagons in a straight line, Benefits Card below
-        <div className="relative max-w-7xl mx-auto">
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            {benefits.map((item, index) => (
+          {/* Second Row */}
+          <div
+            className={`flex ${
+              isTabletOrMobile ? "flex-col space-y-6" : "space-x-6 mt-[-40px]"
+            }`}
+          >
+            {benefits.slice(3, 5).map((item, index) => (
               <div
                 key={index}
                 className="hexagon flex flex-col items-center justify-center"
@@ -162,9 +134,30 @@ export default function BenefitsSection() {
             ))}
           </div>
 
+          {/* Last Row */}
+          <div
+            className={`mt-[-40px] ${isTabletOrMobile ? "flex flex-col" : ""}`}
+          >
+            <div className="hexagon flex flex-col items-center justify-center">
+              <Image
+                src={benefits[5].icon}
+                alt={benefits[5].title}
+                width={50}
+                height={50}
+              />
+              <h3 className="text-md font-semibold mt-3 text-black">
+                {benefits[5].title}
+              </h3>
+              <p className="text-sm text-gray-500">{benefits[5].subtitle}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Benefits Card */}
+        <div className={`${isTabletOrMobile ? "mt-10 w-full" : "lg:w-1/2"}`}>
           <BenefitsCard microscopeRef={microscopeRef} />
         </div>
-      )}
+      </div>
 
       <style jsx>{`
         .hexagon {
@@ -234,19 +227,12 @@ function BenefitsCard({
       </ul>
 
       <div className="mt-6 flex gap-2 items-center">
-        <button className="bg-white text-blue-700 px-4 py-4 rounded-full font-semibold hover:bg-gray-200">
+        <button className="bg-white text-[16px] text-blue-700 px-4 py-3 rounded-full font-semibold hover:bg-gray-200">
           Learn More
         </button>
-        <button className="bg-[#69ABEA] text-white px-4 py-4 rounded-full font-semibold">
+        <button className="bg-[#69ABEA] text-white px-4 py-3 rounded-full font-semibold">
           Get Appointment
         </button>
-      </div>
-
-      <div
-        ref={microscopeRef}
-        className="absolute bottom-[-100] z-[0] right-6 hidden md:block"
-      >
-        <Image src="/img-11.png" alt="Microscope" width={200} height={200} />
       </div>
     </div>
   );
